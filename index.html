@@ -1,0 +1,60 @@
+---
+layout: homepage
+---
+
+<div class="bottom-space center-block">
+  <ul class="post-list">
+    {% for my_post in paginator.posts %}
+      <li class="post-block text-center">
+        <h3 class="post-title">
+          <a href="{{ my_post.url | prepend: site.baseurl }}" class="inverse-noactive">{{ my_post.title }}</a>
+          <div class="decorline3"></div>
+        </h3>
+
+        <p class="post-date">{{ my_post.date | date: "%B %-d, %Y" }}</p>
+        {% if my_post.background %}
+        <img class="post-bg" src="{{ my_post.background | prepend: site.baseurl }}"></img>
+        {% endif %}
+
+        <p class="post-content">{{ my_post.content| strip_html | strip_newlines | truncate: 500 }}</p>
+
+        <a href="{{ my_post.url | prepend: site.baseurl }}"><button type="button" class="btn btn-more">READ MORE</button></a>
+
+        <div class="decorline">
+          <p class="pull-left">
+            {% if my_post.tags[0] %}
+            <a href="{{ site.baseurl }}/tags"><i class="fa fa-tags tags"></i></a>
+            {% for tag in my_post.tags %}{% if tag != "feature" %}
+            <a href="{{ site.baseurl }}/tags#{{ tag }}" class="tags">{{ tag }}</a>
+            {% endif %}{% endfor %}
+            {% endif %}
+          </p>
+          <p class="pull-right">
+            <a class="comments inverse-noactive" href="{{ my_post.url | prepend: site.baseurl }}#disqus_thread"></a>
+          </p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="paginate">
+    <p class="pull-left">
+    {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+    <a href="{{ site.baseurl }}/">&laquo; 新文章</a>
+    {% else %}
+    <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">&laquo; 新文章</a>
+    {% endif %}
+    {% else %}
+    <span>&laquo; 新文章</span>
+    {% endif %}
+    </p>
+
+    <p class="pull-right">
+    {% if paginator.next_page %}
+    <a href="{{ site.baseurl }}{{ paginator.next_page_path }}">过去的文章 &raquo;</a>
+    {% else %}
+    <span>过去的文章 &raquo;</span>
+    {% endif %}
+    </p>
+  </div>
+</div>

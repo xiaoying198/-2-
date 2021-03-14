@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<div class="row">
+	<div class="col-md-9">
+		<article itemscope itemtype="http://schema.org/BlogPosting" class="post-block text-center">
+			<h3 class="post-title" itemprop="name headline">
+				<a href="{{ page.url | prepend: site.baseurl }}" class="inverse-noactive">{{ page.title }}</a>
+				<div class="decorline3"></div>
+			</h3>
+
+			<p class="post-date">
+				<time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+			</p>
+
+			<div class="post-content" itemprop="articleBody">
+				{{ content }}
+			</div>
+
+			<div class="decorline">
+				<p class="pull-left">{% if page.tags[0] %}
+				<a href="{{ site.baseurl }}/tags"><i class="fa fa-tags tags"></i></a>
+				{% for tag in page.tags %}{% if tag != "feature" %}
+				<a href="{{ site.baseurl }}/tags#{{ tag }}" class="tags">{{ tag }}</a>
+				{% endif %}{% endfor %}
+				{% endif %}</p>
+			</div>
+
+			{% if site.disqus_forumname %}
+			{% include comments.html %}
+			{% endif %}
+		</article>
+	</div>
+	<div class="col-md-3">
+		<div class="sidebar center-block">
+			{% include widget_blog.html %}
+		</div>
+	</div>
+</div>
+
+
